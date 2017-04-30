@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<h1>Ajax Page</h1>
+	
+	<script type="text/javascript">
+		function load(){
+			var req;
+
+			if (window.XMLHttpRequest){// browser = IE7+, Firefox, Chrome, Opera, or Safari
+				req=new XMLHttpRequest();
+			}else{// browser = IE6, IE5
+				req=new ActiveXObject("Microsoft.XMLHTTP");
+			}
+
+			req.onreadystatechange=function(){
+				if (req.readyState==4 && req.status==200){
+					console.log("request ok");
+					console.log(req.responseText);
+					document.getElementById("reqDiv").innerHTML=req.responseText;
+				}
+			}
+
+			req.open("GET",document.getElementById("file").value,true);
+			req.send();
+		}
+	</script>
+	
+	<script type="text/javascript" 
+		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js">
+	</script>
+</head>
+
+<body>
+	<div id="reqDiv" style="width: 250px; height: 40px;">
+		Use the drop-down menu in conjunction with the button below.
+	</div>
+	
+	<select id="file" name="messages">
+		<option value="messages/myBirthday.txt">Birthday</option>
+		<option value="messages/myHairColor.txt">Hair Color</option>
+		<option value="messages/myHeight.txt">Height</option>
+	</select>
+	<button type="button" onclick="load()">Load Message</button><br><br>
+</body>
+	
+</html>
