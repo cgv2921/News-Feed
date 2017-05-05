@@ -1,0 +1,15 @@
+.options{
+    margin: 5px;
+    padding: 15px;
+    max-width: 200px;
+    height: 25px;
+    /*border: 1px solid black;*/
+}
+
+.feed{
+    margin: 5px;
+    padding: 15px;
+    max-width: 900px;
+    height: 300px;
+    /*border: 1px solid black;*/
+} 

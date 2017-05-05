@@ -2,28 +2,28 @@
 <html>
 
 <head>
-	<h1>Ajax Page</h1>
+	<h1>News Feed Page</h1>
 	
-	<script type="text/javascript">
-		function load(){
-			var req;
-
-			if (window.XMLHttpRequest){// browser = IE7+, Firefox, Chrome, Opera, or Safari
-				req=new XMLHttpRequest();
-			}else{// browser = IE6, IE5
-				req=new ActiveXObject("Microsoft.XMLHTTP");
+	<link rel="stylesheet" href="styles.css">
+	
+	<script>
+		function showRSS(str){
+			if (str.length == 0) { 
+				document.getElementById("rssOutput").innerHTML = "";
+				return;
 			}
-
-			req.onreadystatechange=function(){
-				if (req.readyState==4 && req.status==200){
-					console.log("request ok");
-					console.log(req.responseText);
-					document.getElementById("reqDiv").innerHTML=req.responseText;
+			if (window.XMLHttpRequest) { // For IE7+, Firefox, Chrome, Opera, or Safari
+				xmlhttp = new XMLHttpRequest();
+			} else {  // For IE6 or IE5
+				xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			xmlhttp.onreadystatechange = function(){
+				if (this.readyState == 4 && this.status == 200){
+					document.getElementById("rssOutput").innerHTML = this.responseText;
 				}
 			}
-
-			req.open("GET",document.getElementById("file").value,true);
-			req.send();
+			xmlhttp.open("GET","getrss.php?q="+str,true);
+			xmlhttp.send();
 		}
 	</script>
 	
@@ -33,16 +33,19 @@
 </head>
 
 <body>
-	<div id="reqDiv" style="width: 250px; height: 40px;">
-		Use the drop-down menu in conjunction with the button below.
-	</div>
-	
-	<select id="file" name="messages">
-		<option value="messages/myBirthday.txt">Birthday</option>
-		<option value="messages/myHairColor.txt">Hair Color</option>
-		<option value="messages/myHeight.txt">Height</option>
-	</select>
-	<button type="button" onclick="load()">Load Message</button><br><br>
+	<form class="options">Select an RSS-feed
+		<select onchange="showRSS(this.value)">
+			<option value="">Select an RSS-feed:</option>
+			<option value="worldNews">Global News</option>
+			<option value="News">NBC News</option>
+			<option value="Sports">ESPN Top Headlines</option>
+			<option value="Weather">Rochester Weather</option>
+			<option value="Tech">CNet News</option>
+		</select><br>
+		<input type="checkbox" name="Weather" value="Weather"> I have a cloud<br>
+		<input type="submit" value="Submit">
+	</form><br>
+	<div class="feed" id="rssOutput">RSS-feed will be listed here...</div>
 </body>
 	
 </html>
