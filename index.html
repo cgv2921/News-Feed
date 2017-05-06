@@ -37,14 +37,15 @@
 		<select onchange="showRSS(this.value)">
 			<option value="">Select an RSS-feed:</option>
 			<option value="worldNews">Global News</option>
-			<option value="News">NBC News</option>
-			<option value="Sports">ESPN Top Headlines</option>
-			<option value="Weather">Rochester Weather</option>
-			<option value="Tech">CNet News</option>
+			<option value="News">US News</option>
+			<option value="Sports">Sports Headlines</option>
+			<option value="Weather">Local Weather</option>
+			<option type="checkbox" value="Tech">Tech News</option>
 		</select><br>
-		<input type="checkbox" name="Weather" value="Weather"> I have a cloud<br>
-		<input type="submit" value="Submit">
-	</form><br>
+		<!--<input type="checkbox" name="Weather" value="Weather"> I have a cloud<br>
+		<input type="checkbox" name="Sports" value="Sports"> I have a ball<br>
+		<input type="submit" value="Submit" onclick="return showRSS(check.value);">-->
+	</form>
 	<div class="feed" id="rssOutput">RSS-feed will be listed here...</div>
 </body>
 	
